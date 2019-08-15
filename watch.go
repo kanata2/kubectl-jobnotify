@@ -34,7 +34,7 @@ func watch(resource, namespace string) (*jobResult, error) {
 		if job.Status.CompletionTime.Before(&now) {
 			return nil, xerrors.New("specified job has already finished.")
 		}
-		if *job.Spec.Completions == job.Status.Succeeded+job.Status.Failed {
+		if *job.Spec.Completions == job.Status.Succeeded {
 			return &jobResult{
 				name:        resource,
 				startedAt:   job.Status.StartTime,
