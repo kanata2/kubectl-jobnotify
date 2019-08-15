@@ -83,5 +83,4 @@ func (s *Slack) Notify(job, namespace string) error {
 			},
 		},
 	})
-	return nil
 }
