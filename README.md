@@ -1,7 +1,7 @@
 kubectl-jobnotify
 ---
 
-This plugin make you notify k8s's job completion through some tools (currently only Slack).  
+This plugin make you notify k8s's job completion through some tools (currently only STDOUT, Slack).  
 However this is **just a toy**(i.e. not production-ready) for studying Kubernetes :)
 
 ### Setup
@@ -9,12 +9,12 @@ However this is **just a toy**(i.e. not production-ready) for studying Kubernete
     $ go get git@github.com:kanata2/kubectl-jobnotify
     $ make build
     $ mv kubectl-jobnotify /path/to/bin
-    $ export SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxxxxxx/xxxxxxx/xxxxxxx
+    $ export SLACK_WEBHOOK_URL=https://hooks.slack.com/services/xxxxxxx/xxxxxxx/xxxxxxx # need if you want to notify to Slack.
 
 
 ### Usage
 
-    $ kubectl jobnotify --job <your_job_name>
+    $ kubectl jobnotify --job <your_job_name> -d <destination(stdout or slack)>
 
 More info: `kubectl jobnotify help`
 
@@ -46,7 +46,8 @@ $ kubectl apply -f job.yaml
 job.batch/sleeper created
 ```
 
-2. `$ kubectl jobnotify --job sleeper`
+2. `$ kubectl jobnotify --job sleeper --destination slack`
 
 3. notify to you
+
 ![result](https://user-images.githubusercontent.com/7460883/63013081-66434f00-bec6-11e9-8b9f-06231312f175.png)
